@@ -1,3 +1,8 @@
+<style type="text/css">
+	#inventoryTbl tr:hover{
+		cursor: pointer;
+	}
+</style>
 <div ng-init="init();">
 	<div class="panel panel-primary">
 		<div class="panel-heading">View Inventory</div>
@@ -5,33 +10,33 @@
 			<div class="form-group pull-left">
 				<input type="text" class="form-control" ng-model="search" placeholder="Search">
 			</div>
-			<table class="table table-striped">
+			<table class="table table-striped table-hover" id="inventoryTbl">
 			    <thead>
 			      <tr>
 			        <th>Sr.No.</th>
 			        <th>Manufacturer Name</th>
-			        <th>Model Name</th>
+			        <!-- <th>Model Name</th> -->
 			        <th>Count</th>
 			      </tr>
 			    </thead>
 			    <tbody>
-			      <tr dir-paginate="data in inventoryLists | filter:search | itemsPerPage:10" ng-click="openPopup(data.MODEL_ID)">
+			      <tr dir-paginate="data in inventoryLists | filter:search | itemsPerPage:10" ng-click="openPopup(data.MANUFACTURER_ID)" pagination-id="allmodels">
 			        <td>{{$index+1}}</td>
 			        <td>{{data.MANUFACTURER_NAME}}</td>
-			        <td>{{data.MODEL_NAME}}</td>
+			        <!-- <td>{{data.MODEL_NAME}}</td> -->
 			        <td>{{data.model_count}}</td>
 			      </tr>
 			    </tbody>
 			  </table>
-			  <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true">
+			  <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true" pagination-id="allmodels">
 			  </dir-pagination-controls><!-- Angularjs Pagination  -->
 
 		</div>
 	</div>
 	<!-- Popup for models details -->
 	<div class="modal modal-primary fade" id="inventoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content ">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="exampleModalLabel">Model Details</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -39,43 +44,40 @@
 	        </button>
 	      </div>
 	      <div class="modal-body row">
-	        <div class="col-md-4">
-	        	<img class="img-responsive img-thumbnail" src="uploads/{{inventoryPopupDetails.IMAGE1}}">
-	        	<img class="img-responsive img-thumbnail" src="uploads/{{inventoryPopupDetails.IMAGE2}}">
-	        </div>
-	        <div class="col-md-8">	        	
-	        	<table class="table table-striped">
-	        		<tr>
-	        			<td><b>Reg. No :</b></td>
-	        			<td>{{inventoryPopupDetails.REG_NUMBER}}</td>
-	        		</tr>
-	        		<tr>
-	        			<td><b>Model Name :</b></td>
-	        			<td>{{inventoryPopupDetails.MODEL_NAME}}</td>
-	        		</tr>
-	        		<tr>
-	        			<td><b>Mfg Name :</b></td>
-	        			<td>{{inventoryPopupDetails.MANUFACTURER_NAME}}</td>
-	        		</tr>
-	        		<tr>
-	        			<td><b>Colour :</b></td>
-	        			<td><div style="width:70px;height:20px;border: 1px solid #000;;background:{{inventoryPopupDetails.COLOR}}"></div></td>
-	        		</tr>
-	        		<tr>
-	        			<td><b>Mfg Year :</b></td>
-	        			<td>{{inventoryPopupDetails.MANUFACTURING_YEAR}}</td>
-	        		</tr>
-	        		<tr>
-	        			<td><b>Note :</b></td>
-	        			<td>{{inventoryPopupDetails.NOTE}}</td>
-	        		</tr>
-	        		<tr>
-	        			<td><b>Date :</b></td>
-	        			<td>{{inventoryPopupDetails.ADDED_DATE}}</td>
-	        		</tr>
-	        		
-	        	</table>
-	        </div>
+	      	<div class="table-responsive">
+	       <table class="table table-striped">
+			    <thead>
+			      <tr>
+			        <th>Id</th>
+			        <th>Image 1</th>
+			        <th>Image 2</th>
+			        <th>Model Name</th>
+			        <th>Mfg. Name</th>
+			        <th>Colour</th>
+			        <th>MFG. Year</th>
+			        <th>Reg. No.</th>
+			        <th>Action</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr dir-paginate="data in inventoryPopupDetails | filter:search | itemsPerPage:10" pagination-id="modelDetails">
+			        <td>{{data.MODEL_ID}}</td>
+			        <td><img src="uploads/{{data.IMAGE1}}" class="img-responsive" style="width: 100px;"></td>
+			        <td><img src="uploads/{{data.IMAGE2}}" class="img-responsive" style="width: 100px;"></td>
+			        <td>{{data.MODEL_NAME}}</td>
+			        <td>{{data.MANUFACTURER_NAME}}</td>
+			        <td><div style="width:70px;height:20px;border: 1px solid #000;;background:{{data.COLOR}}"></div></td>
+			        <td>{{data.MANUFACTURING_YEAR}}</td>
+			        <td>{{data.REG_NUMBER}}</td>
+			        <td>
+			        	<button class="btn btn-primary" ng-click="soldModel(data.MODEL_ID)">Sold</button>
+			        </td>
+			      </tr>
+			    </tbody>
+			  </table>
+			  </div>
+			  <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true" pagination-id="modelDetails">
+			  </dir-pagination-controls>
 	      </div>
 	    </div>
 	  </div>

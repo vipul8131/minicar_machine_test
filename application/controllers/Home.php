@@ -48,7 +48,12 @@ class Home extends CI_Controller {
 
 	public function get_inventory_details_by_id(){//get all inventory data
 		$data = json_decode(file_get_contents('php://input'), true);
-		echo $this->manufacturer_model->getInventoryDetailsById($data['model_id']);
+		echo $this->manufacturer_model->getInventoryDetailsById($data['m_id']);
+	}
+
+	public function sold_model(){
+		$data = json_decode(file_get_contents('php://input'), true);
+		echo $this->manufacturer_model->soldModels($data['model_id']);
 	}
 
 	public function save_models(){//save models with images data
