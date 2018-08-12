@@ -17,10 +17,10 @@ myApp.controller("Carmodelsctrl", ['$scope', '$http', '$state', '$timeout', '$st
     $scope.years = [];
     $scope.modelsData = [];
     var currDates = new Date();
-   	for(var i=1900;i<=currDates.getFullYear();i++){
+   	for(var i=1900;i<=currDates.getFullYear();i++){//dynamic years
    		$scope.years.push(i);
    	}
-    $scope.imageIsLoaded = function(e){
+    $scope.imageIsLoaded = function(e){//Get image and preview image to model by directive
         $scope.$apply(function() {
             var imgStr = e.target.result;
             var imgTypes = imgStr.split(";");
@@ -34,7 +34,7 @@ myApp.controller("Carmodelsctrl", ['$scope', '$http', '$state', '$timeout', '$st
         });
     }
 
-    $scope.get_manufacturers = function(){
+    $scope.get_manufacturers = function(){//get manufacturer data
     	NProgress.start();
     	$http({
     			url:service_url+"home/get_manufacturer",
@@ -50,7 +50,7 @@ myApp.controller("Carmodelsctrl", ['$scope', '$http', '$state', '$timeout', '$st
     		});
     }
 
-    $scope.get_models = function(){
+    $scope.get_models = function(){//get model details
     	NProgress.start();
     	$scope.modelsData = [];
     	$http({
@@ -68,7 +68,7 @@ myApp.controller("Carmodelsctrl", ['$scope', '$http', '$state', '$timeout', '$st
     		});
     }
 
-    $scope.save_models = function(imgs){
+    $scope.save_models = function(imgs){// save model data
     	var model_name = $scope.model_name;
     	var manufacturer_id = $scope.manufacturer_id;
     	var model_color = $scope.model_color;

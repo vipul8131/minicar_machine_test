@@ -46,8 +46,17 @@ class Manufacturer_model extends CI_Model {
     	}
     }
 
+    public function getInventoryDetailsById($data){
+    	$q = $this->db->query("SELECT MODEL_NAME, COLOR, MANUFACTURING_YEAR, REG_NUMBER, NOTE, tbl_models.MODEL_ID, MANUFACTURER_NAME, IMAGE1, IMAGE2, tbl_models.ADDED_DATE FROM tbl_manufacturer JOIN tbl_models on tbl_manufacturer.MANUFACTURER_ID = tbl_models.MANUFACTURER_ID JOIN `tbl_model_images` on tbl_models.MODEL_ID = tbl_model_images.MODEL_ID where tbl_models.MODEL_ID=".$data);
+    	if($q->num_rows() > 0){
+    		return json_encode(array("status" => "success", "data" => $q->result_array()), true);
+    	}else{
+    		return json_encode(array("status" => "success", "data" => ""), true);
+    	}
+    }
+
     public function getInventoryData(){
-    	$q = $this->db->query("SELECT MODEL_NAME, MANUFACTURER_NAME, count(*) as model_count FROM tbl_manufacturer JOIN tbl_models on tbl_manufacturer.MANUFACTURER_ID = tbl_models.MANUFACTURER_ID group by tbl_models.MANUFACTURER_ID");
+    	$q = $this->db->query("SELECT MODEL_NAME, MANUFACTURER_NAME, count(*) as model_count, tbl_models.MODEL_ID FROM tbl_manufacturer JOIN tbl_models on tbl_manufacturer.MANUFACTURER_ID = tbl_models.MANUFACTURER_ID group by tbl_models.MANUFACTURER_ID");
     	if($q->num_rows() > 0){
     		return json_encode(array("status" => "success", "data" => $q->result_array()), true);
     	}else{

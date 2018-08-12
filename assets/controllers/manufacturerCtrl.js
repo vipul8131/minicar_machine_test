@@ -5,7 +5,7 @@ myApp.controller("Manufacturerctrl", ['$scope', '$http', '$state', '$timeout', '
 
     $scope.m_name = "";
     $scope.listsData = [];
-    $scope.get_manufacturers = function(){
+    $scope.get_manufacturers = function(){//get manufacturer list fucntion
     	NProgress.start();
     	$scope.listsData = [];
     	$http({
@@ -22,7 +22,7 @@ myApp.controller("Manufacturerctrl", ['$scope', '$http', '$state', '$timeout', '
     		});
     }
 
-    $scope.save_manufacturer = function(){
+    $scope.save_manufacturer = function(){//save manufacturer data using api to DB
     	var mname = $scope.m_name;
     	if(mname.trim() == "" || mname.trim() == undefined){
     		swal({"title":"Oops!", "text":"Manufacturer name should not be empty", type:"error"});
@@ -34,9 +34,8 @@ myApp.controller("Manufacturerctrl", ['$scope', '$http', '$state', '$timeout', '
     			method:'POST',
     			data:{"m_name":mname, "added_date":current_date},
     			headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-    			/*headers:{'Content-Type':'application/json'}*/
     		}).then(function(resp){
-    			console.log(resp);
+    			//console.log(resp);
     			NProgress.done();
     			//var resp = JSON.parse(response);
     			if(resp.data.status == "success" && resp.data.code == 200){

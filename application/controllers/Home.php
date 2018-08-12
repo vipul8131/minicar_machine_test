@@ -9,45 +9,49 @@ class Home extends CI_Controller {
         $POST = json_decode(file_get_contents('php://input'));
     }
 
-	public function index()
-	{
+	public function index(){
 		$this->load->view('index');
 	}
 
-	public function main_page(){
+	public function main_page(){//load main area
 		$this->load->view('main');
 	}
 
-	public function manufacturer(){
+	public function manufacturer(){//load manufacture page
 		$this->load->view('manufacturer');
 	}
 
-	public function car_models(){
+	public function car_models(){//load car models page
 		$this->load->view('car_models');
 	}
 
-	public function view_inventory(){
+	public function view_inventory(){//load view inventory page
 		$this->load->view('view_inventory');
 	}
 
-	public function save_manufacturer(){
+	public function save_manufacturer(){//save manufacturer data
 		$data = json_decode(file_get_contents('php://input'), true);
 		echo $this->manufacturer_model->saveManufactureData($data);
 	}
 
-	public function get_manufacturer(){
+	public function get_manufacturer(){//get manufacturer data
 		echo $this->manufacturer_model->getManufactureData();
 	}
 
-	public function get_models(){
+	public function get_models(){//get car models data
 		echo $this->manufacturer_model->getModelsData();
 	}
 
-	public function get_inventory_details(){
+	public function get_inventory_details(){//get all inventory data
 		echo $this->manufacturer_model->getInventoryData();
 	}
 
-	public function save_models(){
+	public function get_inventory_details_by_id(){//get all inventory data
+		$data = json_decode(file_get_contents('php://input'), true);
+		echo $this->manufacturer_model->getInventoryDetailsById($data['model_id']);
+	}
+
+	public function save_models(){//save models with images data
 		//print_r($_FILES);
 		$imgs = $_FILES;
 		//print_r($_POST);
