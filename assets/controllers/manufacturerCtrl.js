@@ -7,6 +7,7 @@ myApp.controller("Manufacturerctrl", ['$scope', '$http', '$state', '$timeout', '
     $scope.listsData = [];
     $scope.get_manufacturers = function(){
     	NProgress.start();
+    	$scope.listsData = [];
     	$http({
     			url:service_url+"home/get_manufacturer",
     			method:'GET',

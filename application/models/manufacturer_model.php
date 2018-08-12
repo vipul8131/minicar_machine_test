@@ -46,6 +46,15 @@ class Manufacturer_model extends CI_Model {
     	}
     }
 
+    public function getInventoryData(){
+    	$q = $this->db->query("SELECT MODEL_NAME, MANUFACTURER_NAME, count(*) as model_count FROM tbl_manufacturer JOIN tbl_models on tbl_manufacturer.MANUFACTURER_ID = tbl_models.MANUFACTURER_ID group by tbl_models.MANUFACTURER_ID");
+    	if($q->num_rows() > 0){
+    		return json_encode(array("status" => "success", "data" => $q->result_array()), true);
+    	}else{
+    		return json_encode(array("status" => "success", "data" => ""), true);
+    	}
+    }
+
     public function saveModelData($data){
     	$this->db->select("MODEL_NAME");
     	$this->db->from("tbl_models");

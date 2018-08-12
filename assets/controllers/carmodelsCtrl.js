@@ -52,6 +52,7 @@ myApp.controller("Carmodelsctrl", ['$scope', '$http', '$state', '$timeout', '$st
 
     $scope.get_models = function(){
     	NProgress.start();
+    	$scope.modelsData = [];
     	$http({
     			url:service_url+"home/get_models",
     			method:'GET',

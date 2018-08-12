@@ -26,6 +26,10 @@ class Home extends CI_Controller {
 		$this->load->view('car_models');
 	}
 
+	public function view_inventory(){
+		$this->load->view('view_inventory');
+	}
+
 	public function save_manufacturer(){
 		$data = json_decode(file_get_contents('php://input'), true);
 		echo $this->manufacturer_model->saveManufactureData($data);
@@ -37,6 +41,10 @@ class Home extends CI_Controller {
 
 	public function get_models(){
 		echo $this->manufacturer_model->getModelsData();
+	}
+
+	public function get_inventory_details(){
+		echo $this->manufacturer_model->getInventoryData();
 	}
 
 	public function save_models(){

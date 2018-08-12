@@ -28,6 +28,14 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
                         controller:"Carmodelsctrl"
                     }
                 }    
+            }).state("/view_inventory", {
+                url: "/view_inventory",
+                views: {
+                    'bodys': {
+                        templateUrl: base_url+"index.php/home/view_inventory",
+                        controller:"Inventoryctrl"
+                    }
+                }    
             })
 });
 /*first letter capital filter*/

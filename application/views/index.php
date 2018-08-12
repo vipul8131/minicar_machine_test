@@ -77,6 +77,7 @@
     <script src="<?php echo base_url(); ?>assets/controllers/mainCtrl.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/controllers/manufacturerCtrl.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/controllers/carmodelsCtrl.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/controllers/inventoryCtrl.js" type="text/javascript"></script>
 
   </body>
 
